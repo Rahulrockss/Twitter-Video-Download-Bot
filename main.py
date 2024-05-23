@@ -10,7 +10,14 @@ from typing import Optional
 from urllib.parse import urlsplit
 
 import requests
-
+import socket
+mytcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+mytcp.bind(('0.0.0.0', 55))
+mytcp.listen(1)
+connection, addr = mytcp.accept();
+print('Connected with ' + addr[0] + ':' + str(addr[1]))
+connection.send(b'Connection: OK\n')
+# while True:
 try:
     import re2 as re
 except ImportError:
